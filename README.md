@@ -1,0 +1,37 @@
+# Availabook
+
+COMS W4156 Advanced Software Engineering
+
+##How to execute the maven project
+1. Open your terminal and git clone this repository `this is coe`
+2. Change the current working directory to the local project.
+3. 
+
+## Development Overview
+1. Use [Spark Framework](http://sparkjava.com/) to create the Java web application.
+2. Use [SQLite](https://sqlite.org/) database to store all the backend data.dfasfdsafdsaf
+3. Use [Jade template language](https://www.npmjs.com/package/jade) to write HTML.
+
+## Completed Development
+1. Created User sign up and log in module.
+2. Created User add friends module.
+3. Created User add available time module.
+4. Wrote blackBox test cases for completed development. 
+ * Check the user input of the sign up, log in and add available time function. If the input is not correct, it will display an error message on the page.
+
+## Current Development
+1. Creating buildscript for the project.
+1. Creating user session for the log in and log out function.
+2. Creating friend group module.
+3. Modifying the display of available time list on the home page.
+
+## Questions to find out
+1. How to create buildscript in maven.
+2. How to realize multi-user log in function.
+3. How to use Ajax for request and display data.
+
+### Team StarBugs
+Xun Xue(xx2241)
+Xiaofei Chen(xc2364)
+Maolin Zuo(mz2584)
+Jing Zhong(jz2748)
