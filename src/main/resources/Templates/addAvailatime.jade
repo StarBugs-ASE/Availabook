@@ -1,0 +1,84 @@
+doctype html
+html(lang="en")
+  head
+    title addAvailatime
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
+    style
+
+        font: 20px Montserrat, sans-serif;
+              line-height: 1.8;
+              color: #f5f6f7;
+              }
+              p {font-size: 16px;}
+              .margin {margin-bottom: 45px;}
+              .bg-1 {
+              background-color: powderblue;
+              color: #ffffff;
+              }
+              .bg-2 {
+              background-color: #474e5d; /* Dark Blue */
+              color: #ffffff;
+              }
+              .bg-3 {
+              background-color: #ffffff; /* White */
+              color: #555555;
+              }
+              .bg-4 {
+              background-color: #2f2f2f; /* Black Gray */
+              color: #fff;
+              }
+              .container-fluid {
+              padding-top: 70px;
+              padding-bottom: 70px;
+              }
+        .navbar {
+              padding-top: 15px;
+              padding-bottom: 15px;
+              border: 0;
+              border-radius: 0;
+              margin-bottom: 0;
+              font-size: 15px;
+              letter-spacing: 5px;
+          }
+
+
+
+
+  body
+    nav.navbar.navbar-default
+          .container
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='/userHome') Home
+            #myNavbar.collapse.navbar-collapse
+              ul.nav.navbar-nav.navbar-right
+
+
+
+    div(class = "container-fluid bg-1")
+        h3(style="margin-bottom: 20px;font: 40px Montserrat, sans-serif; ") Please indicate ur availatime!
+        form(method="post", action = "/userHome", style="font: 20px Montserrat, sans-serif;")
+                p(style="margin-bottom: 1px;") Date
+                input(type="date", name="Date",style="color: powderblue")
+                br
+                p(style="margin-bottom: 1px;") Time
+                input(type="time", name="StartTime",style="color: powderblue")
+                | &nbsp to &nbsp
+                input(type="time", name="EndTime",style="color: powderblue")
+                br
+                p(style="margin-bottom: 1px;") What do u have in mind?
+                input(type="text", name="Tendency",style="color: powderblue")
+                p=message
+                br
+                br
+                br
+                button(type="submit", style="background-color:Transparent;
+                                            border-color:Transparent;
+                                            border-style:None;
+                                            font: 30px Montserrat, sans-serif;
+                                            color: white;
+                                            margin-bottom: 100px") Submit here!

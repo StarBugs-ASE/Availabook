@@ -1,0 +1,85 @@
+doctype html
+html(lang="en")
+  head
+    title login
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
+    style
+
+        font: 20px Montserrat, sans-serif;
+              line-height: 1.8;
+              color: #f5f6f7;
+              }
+              p {font-size: 16px;}
+              .margin {margin-bottom: 45px;}
+              .bg-1 {
+              background-color: powderblue;
+              color: #ffffff;
+              }
+              .bg-2 {
+              background-color: #474e5d; /* Dark Blue */
+              color: #ffffff;
+              }
+              .bg-3 {
+              background-color: #ffffff; /* White */
+              color: #555555;
+              }
+              .bg-4 {
+              background-color: #2f2f2f; /* Black Gray */
+              color: #fff;
+              }
+              .container-fluid {
+              padding-top: 70px;
+              padding-bottom: 70px;
+              }
+        .navbar {
+              padding-top: 15px;
+              padding-bottom: 15px;
+              border: 0;
+              border-radius: 0;
+              margin-bottom: 0;
+              font-size: 15px;
+              letter-spacing: 5px;
+          }
+
+
+
+
+  body
+    nav.navbar.navbar-default
+          .container
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='/login') Availabook
+            #myNavbar.collapse.navbar-collapse
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='/SignUp') Sign Up Here!
+
+
+    div(class = "container-fluid bg-1 text-center")
+        h3(style="margin-bottom: 20px;font: 40px Montserrat, sans-serif; ") Wanna know ur friends' availatime?
+        form(method="post", action = "/hp", style="font: 20px Montserrat, sans-serif;")
+                p(style="margin-bottom: 1px;") username
+                input(type="text", name="username",style="color: powderblue")
+                br
+                p(style="margin-bottom: 1px;") password
+                input(type="password", name="password",style="color: powderblue")
+                br
+                p(style="margin-bottom: 1px;") email
+                input(type="text", name="email",style="color: powderblue")
+                br
+                br
+                br
+                button(type="submit",style="background-color:Transparent;
+                                            border-color:Transparent;
+                                            border-style:None;
+                                            font: 30px Montserrat, sans-serif;
+                                            color: white;
+                                            margin-bottom: 100px") Log in NOW!
+
+
+
