@@ -20,17 +20,17 @@ COMS W4156 Advanced Software Engineering
 3. Created User add available time module.
 4. Wrote blackBox test cases for completed development. 
  * Check the user input of the sign up, log in and add available time function. If the input is not correct, it will display an error message on the page.
+5. Created buildscript for the project.
 
 ## Current Development
-1. Creating buildscript for the project.
+
 1. Creating user session for the log in and log out function.
 2. Creating friend group module.
 3. Modifying the display of available time list on the home page.
 
 ## Questions to find out
-1. How to create buildscript in maven.
-2. How to realize multi-user log in function.
-3. How to use Ajax for request and display data.
+1. How to realize multi-user log in function.
+2. How to use Ajax for request and display data.
 
 ### Team StarBugs
 Xun Xue(xx2241)
