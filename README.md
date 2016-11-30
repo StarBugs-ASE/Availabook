@@ -11,7 +11,7 @@ COMS W4156 Advanced Software Engineering
 
 ## Development Overview
 1. Use [Spark Framework](http://sparkjava.com/) to create the Java web application.
-2. Use [SQLite](https://sqlite.org/) database to store all the backend data.dfasfdsafdsaf
+2. Use [SQLite](https://sqlite.org/) database to store all the backend data.
 3. Use [Jade template language](https://www.npmjs.com/package/jade) to write HTML.
 
 ## Completed Development
