@@ -10,6 +10,7 @@ import spark.ModelAndView;
 import spark.QueryParamsMap;
 import spark.template.jade.JadeTemplateEngine;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -25,12 +26,16 @@ public class Main {
         Database sqlitemethod2 = new Database();
 
         sqlitemethod2.openDatabase();
-        sqlitemethod2.createDatabase();
+
+        File f = new File("data.db");
+        if(!f.exists()) {
+            sqlitemethod2.createDatabase();
+        }
+
+
         Connection c = sqlitemethod2.c;
 
-        HashMap<String, User> usermap = new HashMap<>();
 
-        User user = new User("no", "no", "no");
 
         get("/login", (rq, rs) -> new ModelAndView(new HashMap(), "login"), new JadeTemplateEngine());
 
@@ -93,19 +98,27 @@ public class Main {
             String loginInputEmail = body.get("email").value();
             String loginInputName = body.get("username").value();
             String loginInputPassword = body.get("password").value();
+            rq.session().attribute("userName", loginInputName);
+            int userID = sqlitemethod2.IDQuery(c,loginInputName);
+            rq.session().attribute("userID",userID);
 
-            usermap.put(user.getName(), user);
-            for (String key : usermap.keySet()) {
-                System.out.println("LoginUser " + key);
-            } //output login users
+
+
+
 
             String passwdInDB = sqlitemethod2.passwdQuery(c, body.get("username").value());
             System.out.println("passwdInDB " + passwdInDB);
 
-            rs.redirect("/userHome");
+            String userName = (String) rq.session().attribute("userName");
+            String passwd = sqlitemethod2.passwdQuery(c, userName);
+            if (!passwd.equals(passwd)) {
+                rs.redirect("/login");
+            }
+
+
             String encryptedInputPasswd = sqlitemethod2.encryptedPasswd(loginInputPassword);
-            user.setUser(loginInputName, encryptedInputPasswd, loginInputEmail);
             System.out.println("encryptedInputPasswd " + encryptedInputPasswd);
+            rs.redirect("/user/home");
             if (encryptedInputPasswd.equals(passwdInDB)) {
                 System.out.println(passwdInDB);
 
@@ -119,16 +132,14 @@ public class Main {
         });
 
 
-        before("/userHome", (rq, rs) -> {
-            String name = user.getName();
-            String passwd = sqlitemethod2.passwdQuery(c, name);
-            if (!user.getPasswd().equals(passwd)) {
+        before("/user/*", (rq, rs) -> {
+            String userName = (String)rq.session().attribute("userName");
+            if(userName == null || userName.isEmpty()){
                 rs.redirect("/login");
             }
-
         });
 
-        get("/userHome", (rq, rs) -> {
+        get("/user/home", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
             ArrayList<Availatime> availatimeList = sqlitemethod2.availaTimeQuery(c);
             map.put("message2", "availatimeList" + "\n");
@@ -137,7 +148,8 @@ public class Main {
 
             for (int i = 0; i < availatimeList.size(); i++) {
                 Availatime availatime = availatimeList.get(i);
-                int userID1 = sqlitemethod2.IDQuery(c, user.getName());
+                String userName = (String)rq.session().attribute("userName");
+                int userID1 = sqlitemethod2.IDQuery(c, userName);
                 int userID2 = sqlitemethod2.IDQuery(c, availatime.getUserName());
                 boolean isFriend = false;
                 for (int j = 0; j < friendshipList.size(); j++) {
@@ -156,20 +168,21 @@ public class Main {
             return new ModelAndView(map, "userHome");
         }, new JadeTemplateEngine());
 
-        get("/friend", (rq, rs) -> new ModelAndView(new HashMap<>(), "friend"), new JadeTemplateEngine());
+        get("/user/friend", (rq, rs) -> new ModelAndView(new HashMap<>(), "friend"), new JadeTemplateEngine());
 
-        get("/addAvailatime", (rq, rs) -> new ModelAndView(new HashMap<>(), "addAvailatime"), new JadeTemplateEngine());
+        get("/user/addAvailatime", (rq, rs) -> new ModelAndView(new HashMap<>(), "addAvailatime"), new JadeTemplateEngine());
 
-        get("/addFriend", (rq, rs) -> new ModelAndView(new HashMap<>(), "addFriend"), new JadeTemplateEngine());
+        get("/user/addFriend", (rq, rs) -> new ModelAndView(new HashMap<>(), "addFriend"), new JadeTemplateEngine());
 
-        post("/userHome", (rq, rs) -> {
+        post("/user/home", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
             QueryParamsMap body = rq.queryMap();
             String date = body.get("Date").value();
             String start = body.get("StartTime").value();
             String end = body.get("EndTime").value();
             String tendency = body.get("Tendency").value();
-            Availatime tempAvailatime = new Availatime(date,start,end,tendency,user.getName());
+            String userName = (String)rq.session().attribute("userName");
+            Availatime tempAvailatime = new Availatime(date,start,end,tendency,userName);
             System.out.println(date);
             System.out.println(start);
             System.out.println(end);
@@ -180,7 +193,7 @@ public class Main {
             }
 
             else {
-                sqlitemethod2.addAvailatime(c, date, start, end, tendency, user.getName());
+                sqlitemethod2.addAvailatime(c, date, start, end, tendency, userName);
 
                 ArrayList<Availatime> availatimeList = sqlitemethod2.availaTimeQuery(c);
                 map.put("message2", "availatimeList" + "\n");
@@ -189,7 +202,7 @@ public class Main {
 
                 for (int i = 0; i < availatimeList.size(); i++) {
                     Availatime availatime = availatimeList.get(i);
-                    int userID1 = sqlitemethod2.IDQuery(c, user.getName());
+                    int userID1 = sqlitemethod2.IDQuery(c, userName);
                     int userID2 = sqlitemethod2.IDQuery(c, availatime.getUserName());
                     boolean isFriend = false;
                     for (int j = 0; j < friendshipList.size(); j++) {
@@ -207,11 +220,12 @@ public class Main {
             return new ModelAndView(map, "userHome");
         }, new JadeTemplateEngine());
 
-        post("/success ", (rq, rs) -> {
+        post("/user/success ", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
             QueryParamsMap body = rq.queryMap();
             String friendName = body.get("name").value();
-            int UserID1 = sqlitemethod2.IDQuery(c, user.getName());
+            String userName = (String)rq.session().attribute("userName");
+            int UserID1 = sqlitemethod2.IDQuery(c, userName);
             int UserID2 = sqlitemethod2.IDQuery(c, friendName);
             if (UserID1 != UserID2 && UserID1 != 0 && UserID2 != 0) {
                 sqlitemethod2.addFriend(c, UserID1, UserID2);
@@ -220,9 +234,9 @@ public class Main {
             return new ModelAndView(map, "addFriendOrNot");
         }, new JadeTemplateEngine());
 
-        get("/logOut", (rq, rs) -> {
+        get("/user/logOut", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
-            user.setUser("null", "null", "null");
+            rq.session().removeAttribute("userName");
             return new ModelAndView(map, "logOut");
         }, new JadeTemplateEngine());
 

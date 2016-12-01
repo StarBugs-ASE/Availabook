@@ -53,20 +53,20 @@ html(lang="en")
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-              a.navbar-brand(href='/userHome') Availabook
+              a.navbar-brand(href='/user/home') Availabook
             #myNavbar.collapse.navbar-collapse
               ul.nav.navbar-nav.navbar-right
                 li
-                  a(href='/addFriend') Add
+                  a(href='/user/addFriend') Add
                 li
-                  a(href='/addFriend') Specials
+                  a(href='/user/addFriend') Specials
                 li
-                  a(href='/addFriend') Groups
+                  a(href='/user/addFriend') Groups
 
 
     div(class = "container-fluid bg-1 text-center")
         h3(style="margin-bottom: 20px;font: 40px Montserrat, sans-serif; ") Please input ur friend's name below
-        form(method="post", action = "/success", style="font: 20px Montserrat, sans-serif;")
+        form(method="post", action = "/user/success", style="font: 20px Montserrat, sans-serif;")
                 br
                 input(type="text", name="name",style="color: powderblue")
                 br

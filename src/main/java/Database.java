@@ -267,7 +267,7 @@ public class Database{
         System.out.println("Records created successfully");
     }
 
-    public int IDQuery(Connection c, String name) throws SQLException {
+    public int IDQuery(Connection c, String name) {
 
         Statement stmt = null;
         ResultSet rs = null;
@@ -294,7 +294,7 @@ public class Database{
 
     }
 
-    public String passwdQuery(Connection c, String name) throws SQLException {
+    public String passwdQuery(Connection c, String name) {
 
         Statement stmt = null;
         ResultSet rs = null;
@@ -322,7 +322,7 @@ public class Database{
         System.out.println("passwordQuery failed");
         return null;
     }
-    public ArrayList<Availatime> availaTimeQuery(Connection c) throws SQLException {
+    public ArrayList<Availatime> availaTimeQuery(Connection c){
         Statement stmt = null;
         try {
             c.setAutoCommit(false);
@@ -343,7 +343,7 @@ public class Database{
         System.out.println("AvailatimeQuery failed");
         return null;
     }
-    public ArrayList<Friendship> friendshipQuery(Connection c) throws SQLException{
+    public ArrayList<Friendship> friendshipQuery(Connection c){
         Statement stmt = null;
         try{
             c.setAutoCommit(false);
