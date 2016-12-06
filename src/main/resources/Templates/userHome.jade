@@ -1,10 +1,43 @@
+- responseData = messaget
+
+
+
+
+
+
 doctype html
 html
   head
     title userHome
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='http://www.w3schools.com/lib/w3.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
     style
+
+      h2{
+        background-color: powderblue;
+        margin-top: 0;
+      }
+      h3{
+        font: 30px Montserrat, sans-serif;
+        color:  #929191;
+        margin-left: 100px;
+        margin-right: 100px;
+        background-color: #f8f8f8;
+        margin-bottom: 0;
+        padding-bottom:10px;
+      }
+
+      p{
+        font: 20px Montserrat, sans-serif;
+        color: #929191;
+        margin-left: 200px;
+        margin-right: 200px;
+        background-color: #f8f8f8;
+        margin-top: 0;
+      }
       font: 20px Montserrat, sans-serif;
                     line-height: 1.8;
                     color: #f5f6f7;
@@ -42,7 +75,6 @@ html
                 }
 
 
-
   body
       nav.navbar.navbar-default
             .container
@@ -61,7 +93,17 @@ html
                   li
                     a(href='/user/logOut') LogOut
 
+      div(style="background-color:powderblue;margin-top:0;margin:0;")
+        p#demo Friends' Availalist
 
-      div(class = "container-fluid bg-1 text-center")
-        pre(class = "container-fluid bg-1 text-center")=message2
 
+
+
+      script.
+            var data = !{messaget};
+            var i;
+            var list = "";
+            for(i=0;i < data.length; i += 1) {
+                list += "<h2><br><br><h3>"+ data[i].userName + "</h3><p>I'll be free from " + data[i].startTime  + " to " + data[i].endTime+ " on " + data[i].date +"</p><p> I prefer "+ data[i].tendency + "</p>";
+            }
+            document.getElementById("demo").innerHTML = list
