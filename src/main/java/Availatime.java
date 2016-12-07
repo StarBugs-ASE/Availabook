@@ -9,6 +9,7 @@ import java.util.Date;
 
 
 
+@SuppressWarnings("ALL")
 public class Availatime {
     private String date;
     private String startTime;

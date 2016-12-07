@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 
 
 
+@SuppressWarnings("UnusedAssignment")
 public class Database{
     public static void main( String args[] )
     {
