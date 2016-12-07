@@ -30,10 +30,11 @@ COMS W4156 Advanced Software Engineering
 4. Creating display of friend list on the friend page.
 5. Adding function that forbids the users to sign up with a username that is duplicate with others.
 6. Creating the delete button for users to delete the available time.
-7. Producing alerts for error message when users' input are wrong.
+7. Producing alerts for error message when users' inputs are wrong.
 
 ## Questions to find out
 1. Jade Template are hard to implement
+2. Friend Group logic.
 
 ### Team StarBugs
 Xun Xue(xx2241)
