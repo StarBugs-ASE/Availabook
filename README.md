@@ -24,13 +24,17 @@ COMS W4156 Advanced Software Engineering
 
 ## Current Development
 
-1. Creating user session for the log in and log out function.
+1. Creating functions that forbids user to return to the former page when he/she logs out.
 2. Creating friend group module.
 3. Modifying the display of available time list on the home page.
+4. Creating display of friend list on the friend page.
+5. Adding function that forbids the users to sign up with a username that is duplicate with others.
+6. Creating the delete button for users to delete the available time.
+7. Producing alerts for error message when users' inputs are wrong.
 
 ## Questions to find out
-1. How to realize multi-user log in function.
-2. How to use Ajax for request and display data.
+1. Jade Template are hard to implement
+2. Friend Group logic.
 
 ### Team StarBugs
 Xun Xue(xx2241)
