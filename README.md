@@ -31,6 +31,8 @@ COMS W4156 Advanced Software Engineering
 5. Adding function that forbids the users to sign up with a username that is duplicate with others.
 6. Creating the delete button for users to delete the available time.
 7. Producing alerts for error message when users' inputs are wrong.
+8. Creating Unit test cases for every function.
+9. Creating more system level cases for the whole project.
 
 ## Questions to find out
 1. Jade Template are hard to implement
