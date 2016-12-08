@@ -2,6 +2,12 @@ doctype html
 html(lang="en")
   head
     title login
+    script(language='javascript').
+                  //Avoid Backspace
+                  history.pushState(null, null, document.URL);
+                  window.addEventListener('popstate', function () {
+                  history.pushState(null, null, document.URL);
+                  });
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
     style
