@@ -350,6 +350,32 @@ public class Database{
         return 0; //0 means that we can't find the user in database
 
     }
+    public String NameQuery(Connection c, int userID) {
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+
+            c.setAutoCommit(false);
+
+            stmt = c.createStatement();
+
+            PreparedStatement st = c.prepareStatement("SELECT name FROM User where ID=?");
+
+            st.setInt(1, userID);
+
+            rs = st.executeQuery();
+            System.out.println(rs.getString("name"));
+            c.commit();
+            return rs.getString("name");
+
+        }catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        System.out.println("no such ID");
+        return null; //null means that we can't find the user in database
+
+    }
 
     public String passwdQuery(Connection c, String name) {
 

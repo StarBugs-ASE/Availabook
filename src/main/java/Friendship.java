@@ -16,12 +16,17 @@ public class Friendship {
         this.userID1=userID1;
         this.userID2=userID2;
     }
-    public boolean isFriendOrNot(int userID1, int userID2){
+    public boolean isFriendOrNot(int userID1, int userID2) {
         //the last verification is the user can see their own avaialtime
         return (this.userID1 == userID1 && this.userID2 == userID2)
                 || (this.userID1 == userID2 && this.userID2 == userID1)
                 || (userID1 == userID2);
     }
-
+    public int getUserID1(){
+        return userID1;
+    }
+    public int getUserID2(){
+        return userID2;
+    }
 }
 

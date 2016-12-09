@@ -40,6 +40,8 @@ public class Main {
 
 
 
+
+
         get("/login", (rq, rs) -> new ModelAndView(new HashMap(), "login"), new JadeTemplateEngine());
 
         get("/SignUp", (rq, rs) -> new ModelAndView(new HashMap(), "SignUp"), new JadeTemplateEngine());
@@ -113,13 +115,6 @@ public class Main {
             int userID = sqlitemethod2.IDQuery(c,loginInputName);
             rq.session().attribute("userID",userID);
 
-
-
-
-
-
-
-
             String userName = (String) rq.session().attribute("userName");
             String passwd = sqlitemethod2.passwdQuery(c, userName);
 
@@ -186,6 +181,8 @@ public class Main {
 
         get("/user/addAvailatime", (rq, rs) -> new ModelAndView(new HashMap<>(), "addAvailatime"), new JadeTemplateEngine());
 
+
+
         get("/user/addFriend", (rq, rs) -> new ModelAndView(new HashMap<>(), "addFriend"), new JadeTemplateEngine());
 
         post("/user/home", (rq, rs) -> {
@@ -200,6 +197,22 @@ public class Main {
             System.out.println(date);
             System.out.println(start);
             System.out.println(end);
+            ArrayList<String> friendNameList = new ArrayList<String>();
+            /* ############## */
+            /*test friendship*/
+            ArrayList<Friendship> friendshipList = sqlitemethod2.friendshipQuery(c);
+            String name = (String)rq.session().attribute("userName");
+
+            for(int i=0; i<friendshipList.size(); i++){
+                if(sqlitemethod2.IDQuery(c,name)==friendshipList.get(i).getUserID1()){
+                    friendNameList.add(sqlitemethod2.NameQuery(c,friendshipList.get(i).getUserID2()));
+                }
+                else if(sqlitemethod2.IDQuery(c,name)==friendshipList.get(i).getUserID2()){
+                    friendNameList.add(sqlitemethod2.NameQuery(c,friendshipList.get(i).getUserID1()));
+                }
+            }
+            /* test friendship*/
+            /* ############# */
             if(!tempAvailatime.isValidAvailatime()){
                 System.out.println("invalid available timetime");
                 map.put("message", "Your input of available time is invalid.");
@@ -211,7 +224,7 @@ public class Main {
 
                 ArrayList<Availatime> availatimeList = sqlitemethod2.availaTimeQuery(c);
                 ArrayList<Availatime> visibleAvailatime = new ArrayList<Availatime>();
-                ArrayList<Friendship> friendshipList = sqlitemethod2.friendshipQuery(c);
+                //ArrayList<Friendship> friendshipList = sqlitemethod2.friendshipQuery(c);
 
                 Gson gson = new Gson();
 
@@ -243,9 +256,19 @@ public class Main {
             QueryParamsMap body = rq.queryMap();
             String friendName = body.get("name").value();
             String userName = (String)rq.session().attribute("userName");
+            ArrayList<Friendship> friendshipList = sqlitemethod2.friendshipQuery(c);
             int UserID1 = sqlitemethod2.IDQuery(c, userName);
             int UserID2 = sqlitemethod2.IDQuery(c, friendName);
-            if (UserID1 != UserID2 && UserID1 != 0 && UserID2 != 0) {
+            boolean alreadyFriend = false;
+            for(int i=0; i<friendshipList.size(); i++){
+                if(friendshipList.get(i).isFriendOrNot(UserID1,UserID2)){
+                    alreadyFriend = true;
+                }
+            }
+            if(alreadyFriend){
+                map.put("message",friendName + " is already in your friend list");
+            }
+            else if (UserID1 != UserID2 && UserID1 != 0 && UserID2 != 0) {
                 sqlitemethod2.addFriend(c, UserID1, UserID2);
                 map.put("message", friendName + " is ur friend now!");
             } else map.put("message", "sorry, ur friend " + friendName + " hasn't joined availabook. Invite him/her!");
