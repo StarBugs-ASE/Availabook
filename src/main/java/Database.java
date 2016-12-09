@@ -166,12 +166,61 @@ public class Database{
   	- is at least 6 character long
   	- is at most 15 characters long*/
 
+    public boolean noDuplicateUsername(String username){
+        try {
+            Statement stmt = null;
+            ResultSet rs = null;
+            String duplicate = null;
 
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            PreparedStatement st = c.prepareStatement("SELECT * FROM USER where NAME=?");
+            st.setString(1, username);
+            rs = st.executeQuery();
+
+            while(rs.next()){
+                duplicate = rs.getString(1);
+            }
+
+            if(duplicate == null){
+                return true;
+            }
+        }catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean noDuplicateemail(String email){
+        try {
+            Statement stmt = null;
+            ResultSet rs = null;
+            String duplicate = null;
+
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            PreparedStatement st = c.prepareStatement("SELECT * FROM USER where EMAIL=?");
+            st.setString(1, email);
+            rs = st.executeQuery();
+
+            while(rs.next()){
+                duplicate = rs.getString(1);
+            }
+
+            if(duplicate == null){
+                return true;
+            }
+        }catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return false;
+    }
     public String signUp(Connection c, String name, String passwd, String email) {
 
 
         Statement stmt = null;
-        if ((isValidEmailAddress(email))&& (isValidName(name))&&(isValidPasswd(passwd))) {
+        if ((noDuplicateUsername(name))&& (noDuplicateemail(email))&&
+                (isValidEmailAddress(email)) && (isValidName(name))&&(isValidPasswd(passwd))) {
             try {
 
                 c.setAutoCommit(false);
@@ -225,7 +274,14 @@ public class Database{
                 System.out.println("Wrong Password Input");
                 return "Password";
             }
-
+            else if (!noDuplicateUsername(name)){
+                System.out.println("Duplicate Username");
+                return "DuplicateUsername";
+            }
+            else if (!noDuplicateemail(email)){
+                System.out.println("Duplicate Email");
+                return "DuplicateEmail";
+            }
             else return "fail";
         }
     }
@@ -364,5 +420,7 @@ public class Database{
         System.out.println("FriendshipQuery failed");
         return null;
     }
+
+
 
 }

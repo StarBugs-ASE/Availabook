@@ -89,6 +89,14 @@ public class Main {
                 emailmap.put("message3", "Your password is invalid.");
                 return new ModelAndView(emailmap, "SignUp");
             }
+            else if (signUp.equals("DuplicateUsername")){
+                emailmap.put("message3", "Duplicate Username, please choose another username.");
+                return new ModelAndView(emailmap, "SignUp");
+            }
+            else if (signUp.equals("DuplicateEmail")){
+                emailmap.put("message3", "Duplicate Email, please choose another email.");
+                return new ModelAndView(emailmap, "SignUp");
+            }
             else {
                 return new ModelAndView(emailmap, "SignUp");
             }
