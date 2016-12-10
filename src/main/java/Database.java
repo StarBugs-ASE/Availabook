@@ -90,7 +90,7 @@ public class Database{
     }
     public Connection c = null;
 
-    public void openDatabase(){
+    public boolean openDatabase(){
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:data.db");
@@ -98,6 +98,7 @@ public class Database{
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("opened database successfully");
+        return true;
     }
 
 
