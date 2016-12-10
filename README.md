@@ -35,6 +35,7 @@ COMS W4156 Advanced Software Engineering
 5. Producing alerts for error message when users' inputs are wrong.
 6. Creating Unit test cases for every function.
 7. Creating more system level cases for the whole project.
+8. Sorting availatime by starting time or by user name.
 
 ## Questions to find out
 1. Jade Template are hard to implement
