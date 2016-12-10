@@ -24,6 +24,7 @@ COMS W4156 Advanced Software Engineering
 5. Created buildscript for the project.
 6. Created functions that forbids user to return to the former page when he/she logs out.
 7. Added function that forbids the users to sign up with a username that is duplicate with others.
+8. Addded feature for user to delete their friends.
 
 ## Current Development
 
