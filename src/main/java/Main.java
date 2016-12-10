@@ -185,6 +185,32 @@ public class Main {
 
         get("/user/addFriend", (rq, rs) -> new ModelAndView(new HashMap<>(), "addFriend"), new JadeTemplateEngine());
 
+        get("/user/deleteFriend", (rq, rs) -> new ModelAndView(new HashMap<>(), "deleteFriend"), new JadeTemplateEngine());
+
+        post("/user/deletesuccess ", (rq, rs) -> {
+            HashMap<String, String> map = new HashMap<>();
+            QueryParamsMap body = rq.queryMap();
+            String friendName = body.get("name").value();
+            String userName = (String)rq.session().attribute("userName");
+            ArrayList<Friendship> friendshipList = sqlitemethod2.friendshipQuery(c);
+            int UserID1 = sqlitemethod2.IDQuery(c, userName);
+            int UserID2 = sqlitemethod2.IDQuery(c, friendName);
+            boolean isFriendOrNot = false;
+            for(int i=0; i<friendshipList.size(); i++){
+                if(friendshipList.get(i).isFriendOrNot(UserID1,UserID2)){
+                    isFriendOrNot = true;
+                }
+            }
+            if(!isFriendOrNot){
+                map.put("message",friendName + " is not in your friend list");
+            }
+            else{
+                sqlitemethod2.deleteFriend(c, UserID1, UserID2);
+                map.put("message", friendName + " has been removed from your friend list!");
+            }
+            return new ModelAndView(map, "addFriendOrNot");
+        }, new JadeTemplateEngine());
+
         post("/user/home", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
             QueryParamsMap body = rq.queryMap();

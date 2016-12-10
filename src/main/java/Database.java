@@ -447,6 +447,27 @@ public class Database{
         return null;
     }
 
+    public void deleteFriend(Connection c, int userID, int friendID){
+        Statement stmt = null;
+        try{
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            //PreparedStatement st = c.prepareStatement("DELETE from FRIENDSHIP where UserID1=?;");
+            //st.setInt(1,userID);
+            PreparedStatement st = c.prepareStatement("DELETE from FRIENDSHIP where (UserID1=? AND UserID2=?) OR (UserID1=? AND UserID2=?)");
+            st.setInt(1,userID);
+            st.setInt(2,friendID);
+            st.setInt(3,friendID);
+            st.setInt(4,userID);
+            st.executeUpdate();
+            System.out.println();
+            c.commit();
+            stmt.close();
+        }catch (Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
+
 
 
 }
