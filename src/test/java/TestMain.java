@@ -1,23 +1,17 @@
+import org.junit.Test;
+
 import java.io.File;
 
-import static org.junit.Assert.assertTrue;
-
 /**
- * Created by zhongjing on 12/9/16.
+ * Created by zhongjing on 12/10/16.
  */
 public class TestMain {
-    @org.junit.Test
-    public void DetectIfDatabaseExist() {
-        Database tester = new Database(); // Database Class is tested
+    @Test
+    public void Main() {
         File f = new File("data.db");
-        boolean a = false;
-        if(!f.exists()) {
-            a = true;
-            tester.createDatabase();
+        if (f.exists()) {
+            f.delete();
         }
-        else a = true;
-        assertTrue("DatabaseCanBeDetected", a);
+        Main.main(new String[] {"arg1"});
     }
-
-
 }

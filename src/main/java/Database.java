@@ -51,7 +51,7 @@ public class Database{
         System.out.println("Table created successfully");
     }
 
-    public void createDatabase(){
+    public boolean createDatabase(){
         Connection c = null;
         Statement stmt = null;
         try {
@@ -87,6 +87,7 @@ public class Database{
             System.exit(0);
         }
         System.out.println("Table created successfully");
+        return true;
     }
     public Connection c = null;
 
