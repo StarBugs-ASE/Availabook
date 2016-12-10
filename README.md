@@ -22,18 +22,18 @@ COMS W4156 Advanced Software Engineering
 4. Wrote blackBox test cases for completed development. 
  * Check the user input of the sign up, log in and add available time function. If the input is not correct, it will display an error message on the page.
 5. Created buildscript for the project.
+6. Created functions that forbids user to return to the former page when he/she logs out.
+7. Added function that forbids the users to sign up with a username that is duplicate with others.
 
 ## Current Development
 
-1. Creating functions that forbids user to return to the former page when he/she logs out.
-2. Creating friend group module.
-3. Modifying the display of available time list on the home page.
-4. Creating display of friend list on the friend page.
-5. Adding function that forbids the users to sign up with a username that is duplicate with others.
-6. Creating the delete button for users to delete the available time.
-7. Producing alerts for error message when users' inputs are wrong.
-8. Creating Unit test cases for every function.
-9. Creating more system level cases for the whole project.
+1. Creating friend group module.
+2. Modifying the display of available time list on the home page.
+3. Creating display of friend list on the friend page.
+4. Creating the delete button for users to delete the available time.
+5. Producing alerts for error message when users' inputs are wrong.
+6. Creating Unit test cases for every function.
+7. Creating more system level cases for the whole project.
 
 ## Questions to find out
 1. Jade Template are hard to implement
