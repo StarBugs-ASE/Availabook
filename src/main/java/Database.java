@@ -103,7 +103,7 @@ public class Database{
     }
 
 
-    public String encryptedwojiushiyaocuoPasswd(String password){
+    public String encryptedPasswd(String password){
         String generatedPassword = null;
 
         // Create MessageDigest instance for MD5
