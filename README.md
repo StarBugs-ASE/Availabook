@@ -37,6 +37,7 @@ COMS W4156 Advanced Software Engineering
 7. Creating more system level cases for the whole project.
 8. Sorting availatime by starting time or by user name.
 9. Modifying the friend interface.
+10. Fixing the bugs about session.
 
 ## Questions to find out
 1. Jade Template are hard to implement
