@@ -157,14 +157,14 @@ public class Main {
                 if(userID1==userID2){
                     myAvailatime.add(availatime);
                 }
-                if(friendshipList.size()==0){
-                    isFriend = true;
+                //if(friendshipList.size()==0){
+                   // isFriend = true;
+                //}
+
+                for (int j = 0; j < friendshipList.size(); j++) {
+                    isFriend = isFriend || friendshipList.get(j).isFriendOrNot(userID1, userID2);
                 }
-                else {
-                    for (int j = 0; j < friendshipList.size(); j++) {
-                        isFriend = isFriend || friendshipList.get(j).isFriendOrNot(userID1, userID2);
-                    }
-                }
+
                 if (isFriend) {
                     /*String newAvailatime = map.get("message2") + availatime.getUserName() + ": " + availatime.getDate()
                             + " " + availatime.getStartTime() + " " + availatime.getEndTime() + " "
@@ -172,6 +172,7 @@ public class Main {
                     map.put("message2", newAvailatime); */
                     visibleAvailatime.add(availatime);
                 }
+
                 System.out.println(availatime.getUserName() + ": " + availatime.getDate() + " "
                         + availatime.getStartTime() + " " + availatime.getEndTime() + " "
                         + availatime.getTendency() + "\n");
@@ -323,6 +324,7 @@ public class Main {
                     if(userID1==userID2){
                         myAvaialtime.add(availatime);
                     }
+
                     for (int j = 0; j < friendshipList.size(); j++) {
                         isFriend = isFriend || friendshipList.get(j).isFriendOrNot(userID1, userID2);
                     }
