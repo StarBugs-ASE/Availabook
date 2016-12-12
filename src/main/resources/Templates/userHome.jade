@@ -98,6 +98,16 @@ html
       div(style="background-color:powderblue;margin-top:0;margin:0;")
         p#demo Friends' Availalist
 
+      div(style="background-color:powderblue;margin-top:0;margin:0;")
+        form(method="post", action = "/user/deleteavailatime", style="font: 20px Montserrat, sans-serif;")
+                        select#availatime(name="availatime")
+                        button(type="submit",style="background-color:Transparent;
+                                                                border-color:Transparent;
+                                                                border-style:None;
+                                                                font: 30px Montserrat, sans-serif;
+                                                                color: white;
+                                                                margin-bottom: 100px"
+                                                                ) Delete!
 
 
 
@@ -109,3 +119,10 @@ html
                 list += "<h2><br><br><h3>"+ data[i].userName + "</h3><p>I'll be free from " + data[i].startTime  + " to " + data[i].endTime+ " on " + data[i].date +"</p><p> I prefer "+ data[i].tendency + "</p>";
             }
             document.getElementById("demo").innerHTML = list
+
+            var data = !{messagemy};;
+            var mylist = "";
+            for(i=0;i < data.length; i += 1) {
+                            mylist += "<option>"+ data[i].startTime + " " +  data[i].endTime+ " " + data[i].date+ " " + data[i].tendency + "</option>";
+            }
+            document.getElementById("availatime").innerHTML = mylist;

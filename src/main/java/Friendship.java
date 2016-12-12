@@ -19,9 +19,9 @@ public class Friendship {
     public boolean isFriendOrNot(int userID1, int userID2) {
         //the last verification is the user can see their own avaialtime
         return (this.userID1 == userID1 && this.userID2 == userID2)
-                || (this.userID1 == userID2 && this.userID2 == userID1)
-                || (userID1 == userID2);
+                || (this.userID1 == userID2 && this.userID2 == userID1);
     }
+
     public int getUserID1(){
         return userID1;
     }

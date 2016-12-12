@@ -63,6 +63,26 @@ html(lang="en")
                 li
                   a(href='/user/addFriend') Friends group
 
+    div(style="background-color:powderblue;margin-top:0;margin:0;")
+            form(method="post", action = "/user/deletesuccess", style="font: 20px Montserrat, sans-serif;")
+                select#friends( name="name")
+                button(type="submit",style="background-color:Transparent;
+                                                        border-color:Transparent;
+                                                        border-style:None;
+                                                        font: 30px Montserrat, sans-serif;
+                                                        color: white;
+                                                        margin-bottom: 100px"
+                                                        ) Delete!
+
+    script.
+            var data = !{friendNameList};
+            var i;
+            var list = "";
+            for(i=0;i < data.length; i += 1) {
+                list += "<option>"+ data[i].name +""</option>";
+            }
+            document.getElementById("friends").innerHTML = list;
+
 
 
 
