@@ -293,5 +293,27 @@ public class TestDatabase {
         System.out.println("Test Finish.");
     }
 
+    @Test
+    public void DatabaseCanDeleteAvailatime() {
+        File f = new File("data.db");
+        if (f.exists()) {
+            f.delete();
+        }
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:data.db");
+            stmt = c.createStatement();
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.exit(0);
+        }
+        Database tester = new Database(); // Database Class is tested
+        tester.deleteAvailatime(c, "2017-1-1", "11:00am", "11:00pm", "Hiking", "Kobe");
+        System.out.println("Test Finish.");
+    }
+
 }
 
