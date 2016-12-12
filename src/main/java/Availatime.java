@@ -51,7 +51,7 @@ public class Availatime {
         System.out.println(timeFormat.format(time));
         if(this.getStartTime().compareTo(this.getEndTime()) >= 0
                 || this.getDate().compareTo(String.valueOf(dateFormat.format(date))) < 0
-                || (this.getDate().compareTo(dateFormat.format(date)) == 0 && this.getStartTime().compareTo(timeFormat.format(time)) < 0))
+                || (this.getDate().compareTo(dateFormat.format(date)) == 0 && this.getStartTime().compareTo(timeFormat.format(time)) <= 0))
         {
             System.out.println(this.getDate().compareTo(timeFormat.format(date)));
             return false;
