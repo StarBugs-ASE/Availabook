@@ -470,6 +470,28 @@ public class Database{
         }
     }
 
+    public void deleteAvailatime(Connection c, String startTime, String endTime, String tendency, String userName, String date){
+        Statement stmt = null;
+        try{
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            //PreparedStatement st = c.prepareStatement("DELETE from FRIENDSHIP where UserID1=?;");
+            //st.setInt(1,userID);
+            PreparedStatement st = c.prepareStatement("DELETE from AVAILATIME where (startTime=? AND endTime=? AND tendency=? AND userName=? AND date=?)");
+            st.setString(1,startTime);
+            st.setString(2,endTime);
+            st.setString(3,tendency);
+            st.setString(4,userName);
+            st.setString(5,date);
+            st.executeUpdate();
+            System.out.println();
+            c.commit();
+            stmt.close();
+        }catch (Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
+
 
 
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.sql.Time;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -210,7 +211,7 @@ public class Main {
             /* ############# */
             System.out.print(gson.toJson(friendNameList));
             System.out.print(friendNames);
-            return new ModelAndView(map, "friend");
+            return new ModelAndView(map, "you have success");
         }, new JadeTemplateEngine());
 
         get("/user/addAvailatime", (rq, rs) -> new ModelAndView(new HashMap<>(), "addAvailatime"), new JadeTemplateEngine());
@@ -221,7 +222,7 @@ public class Main {
 
         get("/user/deleteFriend", (rq, rs) -> new ModelAndView(new HashMap<>(), "deleteFriend"), new JadeTemplateEngine());
 
-        post("/user/deletesuccess ", (rq, rs) -> {
+        post("/user/deletesuccess", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
             QueryParamsMap body = rq.queryMap();
             String friendName = body.get("name").value();
@@ -244,6 +245,43 @@ public class Main {
             }
             return new ModelAndView(map, "addFriendOrNot");
         }, new JadeTemplateEngine());
+
+
+
+        post("/user/deleteavailatime", (rq, rs) -> {
+            HashMap<String, String> map = new HashMap<>();
+            QueryParamsMap body = rq.queryMap();
+            String targetAvailatime = body.get("availatime").value();
+            String userName = (String)rq.session().attribute("userName");
+            String[] array = new String[4];
+            ArrayList<Availatime> tempAvailatime = sqlitemethod2.availaTimeQuery(c);
+            ArrayList<String> newAvaialtime = new ArrayList<String>();
+            for(int i=0; i<tempAvailatime.size();i++){
+                String xx = tempAvailatime.get(i).getStartTime() + " " + tempAvailatime.get(i).getEndTime()+" "
+                        + tempAvailatime.get(i).getDate() +" "+ tempAvailatime.get(i).getTendency();
+                if(targetAvailatime.equals(xx)){
+                    sqlitemethod2.deleteAvailatime(c,tempAvailatime.get(i).getStartTime(),tempAvailatime.get(i).getEndTime(),tempAvailatime.get(i).getTendency(),userName,tempAvailatime.get(i).getDate());
+                }
+            }
+
+            System.out.print("11111111");
+
+            //ArrayList<Availatime> availatimeList = sqlitemethod2.availaTimeQuery(c);
+            //sqlitemethod2.deleteAvailatime(c,availatime[0],availatime[1],availatime[3],userName,availatime[2]);
+            return new ModelAndView(map, "deleteavailatime");
+        }, new JadeTemplateEngine());
+/*
+        post("/user/deleteavailatime",(rq,rs) -> {
+            HashMap<String, String> map = new HashMap<>();
+            QueryParamsMap body = rq.queryMap();
+            String temp = body.get("availatime").value();
+            String userName = (String)rq.session().attribute("userName");
+            String[] availatime = temp.split(" ");
+            ArrayList<Availatime> availatimeList = sqlitemethod2.availaTimeQuery(c);
+            sqlitemethod2.deleteAvailatime(c,availatime[0],availatime[1],availatime[3],userName,availatime[2]);
+            return new ModelAndView(map, "deleteavailatime");
+        },new JadeTemplateEngine());
+        */
 
         post("/user/home", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
@@ -328,6 +366,8 @@ public class Main {
             } else map.put("message", "sorry, ur friend " + friendName + " hasn't joined availabook. Invite him/her!");
             return new ModelAndView(map, "addFriendOrNot");
         }, new JadeTemplateEngine());
+
+
 
         get("/user/logOut", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
