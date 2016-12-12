@@ -108,28 +108,29 @@ public class Main {
 
 
         post("/hp", (rq, rs) -> {
-
+            HashMap<String, String> passwordmap = new HashMap<>();
             QueryParamsMap body = rq.queryMap();
             String loginInputEmail = body.get("email").value();
             String loginInputName = body.get("username").value();
             String loginInputPassword = body.get("password").value();
             rq.session().attribute("userName", loginInputName);
-            int userID = sqlitemethod2.IDQuery(c,loginInputName);
-            rq.session().attribute("userID",userID);
+            int userID = sqlitemethod2.IDQuery(c, loginInputName);
+            rq.session().attribute("userID", userID);
             String userName = (String) rq.session().attribute("userName");
             String passwd = sqlitemethod2.passwdQuery(c, userName);
 
 
-
             String encryptedInputPasswd = sqlitemethod2.encryptedPasswd(loginInputPassword);
-            if (passwd == null||!passwd.equals(encryptedInputPasswd)) {
-                rs.redirect("/login");
+            if (passwd != null && passwd.equals(encryptedInputPasswd)) {
+                System.out.println("encryptedInputPasswd " + encryptedInputPasswd);
+                rs.redirect("/user/home");
+                return null;
             }
-            System.out.println("encryptedInputPasswd " + encryptedInputPasswd);
-            rs.redirect("/user/home");
-
-            return null;
-        });
+            else {
+                passwordmap.put("message3", "Password invalid!");
+                return new ModelAndView(passwordmap, "login");
+            }
+        }, new JadeTemplateEngine());
 
 
         before("/user/*", (rq, rs) -> {
