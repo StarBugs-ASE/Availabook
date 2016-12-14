@@ -25,23 +25,22 @@ COMS W4156 Advanced Software Engineering
 6. Created functions that forbids user to return to the former page when he/she logs out.
 7. Added function that forbids the users to sign up with a username that is duplicate with others.
 8. Addded feature for user to delete their friends.
+6. Created Unit test cases for every function.
+7. Created system level cases for the whole project.
+8. Completed user session module.
 
 ## Current Development
 
-1. Creating friend group module.
 2. Modifying the display of available time list on the home page.
 3. Creating display of friend list on the friend page.
 4. Creating the delete button for users to delete the available time.
 5. Producing alerts for error message when users' inputs are wrong.
-6. Creating Unit test cases for every function.
-7. Creating more system level cases for the whole project.
 8. Sorting availatime by starting time or by user name.
 9. Modifying the friend interface.
-10. Fixing the bugs about session.
 
 ## Questions to find out
 1. Jade Template are hard to implement
-2. Friend Group logic.
+2. UI display
 
 ### Team StarBugs
 Xun Xue(xx2241)
