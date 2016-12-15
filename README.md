@@ -28,9 +28,6 @@ COMS W4156 Advanced Software Engineering
 6. Created Unit test cases for every function.
 7. Created system level cases for the whole project.
 8. Completed user session module.
-
-## Current Development
-
 2. Modifying the display of available time list on the home page.
 3. Creating display of friend list on the friend page.
 4. Creating the delete button for users to delete the available time.
@@ -38,9 +35,8 @@ COMS W4156 Advanced Software Engineering
 8. Sorting availatime by starting time or by user name.
 9. Modifying the friend interface.
 
-## Questions to find out
-1. Jade Template are hard to implement
-2. UI display
+## Current Development
+done！
 
 ### Team StarBugs
 Xun Xue(xx2241)
