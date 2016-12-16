@@ -28,15 +28,15 @@ COMS W4156 Advanced Software Engineering
 6. Created Unit test cases for every function.
 7. Created system level cases for the whole project.
 8. Completed user session module.
-2. Modifying the display of available time list on the home page.
-3. Creating display of friend list on the friend page.
-4. Creating the delete button for users to delete the available time.
-5. Producing alerts for error message when users' inputs are wrong.
-8. Sorting availatime by starting time or by user name.
-9. Modifying the friend interface.
+2. Modified the display of available time list on the home page.
+3. Created display of friend list on the friend page.
+4. Created the delete button for users to delete the available time.
+5. Produced alerts for error message when users' inputs are wrong.
+8. Sorted availatime by starting time or by user name.
+9. Modified the friend interface.
 
 ## Current Development
-done！
+All done.
 
 ### Team StarBugs
 Xun Xue(xx2241)
