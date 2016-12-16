@@ -108,29 +108,28 @@ public class Main {
 
 
         post("/hp", (rq, rs) -> {
-            HashMap<String, String> passwordmap = new HashMap<>();
+
             QueryParamsMap body = rq.queryMap();
             String loginInputEmail = body.get("email").value();
             String loginInputName = body.get("username").value();
             String loginInputPassword = body.get("password").value();
             rq.session().attribute("userName", loginInputName);
-            int userID = sqlitemethod2.IDQuery(c, loginInputName);
-            rq.session().attribute("userID", userID);
+            int userID = sqlitemethod2.IDQuery(c,loginInputName);
+            rq.session().attribute("userID",userID);
             String userName = (String) rq.session().attribute("userName");
             String passwd = sqlitemethod2.passwdQuery(c, userName);
 
+            HashMap<String,String> map = new HashMap<String, String>();
 
             String encryptedInputPasswd = sqlitemethod2.encryptedPasswd(loginInputPassword);
-            if (passwd != null && passwd.equals(encryptedInputPasswd)) {
-                System.out.println("encryptedInputPasswd " + encryptedInputPasswd);
-                rs.redirect("/user/home");
-                return null;
+            if (passwd == null||!passwd.equals(encryptedInputPasswd)) {
+                rs.redirect("/login");
             }
-            else {
-                passwordmap.put("message3", "Password invalid!");
-                return new ModelAndView(passwordmap, "login");
-            }
-        }, new JadeTemplateEngine());
+            System.out.println("encryptedInputPasswd " + encryptedInputPasswd);
+            rs.redirect("/user/home");
+
+            return null;
+        });
 
 
         before("/user/*", (rq, rs) -> {
@@ -149,6 +148,29 @@ public class Main {
             ArrayList<Availatime> visibleAvailatime = new ArrayList<Availatime>();
             ArrayList<Friendship> friendshipList = sqlitemethod2.friendshipQuery(c);
             ArrayList<Availatime> myAvailatime = new ArrayList<>();
+
+            ArrayList<String> friendNameList = new ArrayList<String>();
+            String name = (String)rq.session().attribute("userName");
+            for(int i=0; i<friendshipList.size(); i++){
+                if(sqlitemethod2.IDQuery(c,name)==friendshipList.get(i).getUserID1()){
+                    friendNameList.add(sqlitemethod2.NameQuery(c,friendshipList.get(i).getUserID2()));
+                }
+                else if(sqlitemethod2.IDQuery(c,name)==friendshipList.get(i).getUserID2()){
+                    friendNameList.add(sqlitemethod2.NameQuery(c,friendshipList.get(i).getUserID1()));
+                }
+            }
+            String tempString = new String();
+            String friendNames = new String();
+            tempString = "[";
+            for(int i=0; i<friendNameList.size();i++){
+                tempString += "{\"name\":\"" + friendNameList.get(i) + "\"},";
+            }
+            friendNames = tempString.substring(0,tempString.length()-1);
+            friendNames += "]";
+            map.put("friendNameList", friendNames);
+
+
+
             for (int i = 0; i < availatimeList.size(); i++) {
                 Availatime availatime = availatimeList.get(i);
                 String userName = (String)rq.session().attribute("userName");
@@ -181,6 +203,7 @@ public class Main {
             map.put("messagemy",gson.toJson(myAvailatime));
             map.put("messaget", gson.toJson(visibleAvailatime));
             System.out.println(gson.toJson(visibleAvailatime));
+            System.out.print(friendNames);
             return new ModelAndView(map, "userHome");
         }, new JadeTemplateEngine());
 
@@ -299,7 +322,28 @@ public class Main {
             System.out.println(end);
 
 
+            ArrayList<String> friendNameList = new ArrayList<String>();
             ArrayList<Friendship> friendshipList = sqlitemethod2.friendshipQuery(c);
+            String name = (String)rq.session().attribute("userName");
+            for(int i=0; i<friendshipList.size(); i++){
+                if(sqlitemethod2.IDQuery(c,name)==friendshipList.get(i).getUserID1()){
+                    friendNameList.add(sqlitemethod2.NameQuery(c,friendshipList.get(i).getUserID2()));
+                }
+                else if(sqlitemethod2.IDQuery(c,name)==friendshipList.get(i).getUserID2()){
+                    friendNameList.add(sqlitemethod2.NameQuery(c,friendshipList.get(i).getUserID1()));
+                }
+            }
+            String tempString = new String();
+            String friendNames = new String();
+            tempString = "[";
+            for(int i=0; i<friendNameList.size();i++){
+                tempString += "{\"name\":\"" + friendNameList.get(i) + "\"},";
+            }
+            friendNames = tempString.substring(0,tempString.length()-1);
+            friendNames += "]";
+            map.put("friendNameList", friendNames);
+
+
 
             if(!tempAvailatime.isValidAvailatime()){
                 System.out.println("invalid available timetime");

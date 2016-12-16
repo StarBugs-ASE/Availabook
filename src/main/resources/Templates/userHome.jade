@@ -109,6 +109,8 @@ html
                                                                 margin-bottom: 100px"
                                                                 ) Delete!
 
+      div(style="background-color:powderblue;margin-top:0;margin:0;")
+        ul#friendlist
 
 
       script.
@@ -126,3 +128,12 @@ html
                             mylist += "<option>"+ data[i].startTime + " " +  data[i].endTime+ " " + data[i].date+ " " + data[i].tendency + "</option>";
             }
             document.getElementById("availatime").innerHTML = mylist;
+
+            var data3 = !{friendNameList};
+            var j;
+            var nameList = "<ul>";
+            for (j = 0; j < data3.length; j +=1) {
+                nameList += "<li>" + data3[j].name + "</li>";
+            }
+            nameList += "</ul>";
+            document.getElementById("friendlist").innerHTML = nameList;
