@@ -245,43 +245,34 @@ public class Database{
             if (!isValidName(name)){
                 if (!isValidEmailAddress(email)){
                     if (!isValidPasswd(passwd)){
-                        System.out.println("Wrong Name&Email&Password Input");
                         return "Name&Email&Password";
                     }
                     else {
-                        System.out.println("Wrong Name&Email Input");
                         return "Name&Email";
                     }
                 }
                 else if (!isValidPasswd(passwd)){
-                    System.out.println("Wrong Name&Password Input");
                     return "Name&Password";
                 }
                 else {
-                    System.out.println("Wrong Name Input");
                     return "Name";
                 }
             }
             else if (!isValidEmailAddress(email)){
                 if (!isValidPasswd(passwd)){
-                    System.out.println("Wrong Email&Password Input");
                     return "Email&Password";
                 }
                 else {
-                    System.out.println("Wrong Email Input");
                     return "Email&Password";
                 }
             }
             else if (!isValidPasswd(passwd)){
-                System.out.println("Wrong Password Input");
                 return "Password";
             }
             else if (!noDuplicateUsername(name)){
-                System.out.println("Duplicate Username");
                 return "DuplicateUsername";
             }
             else if (!noDuplicateemail(email)){
-                System.out.println("Duplicate Email");
                 return "DuplicateEmail";
             }
             else return "fail";
@@ -341,7 +332,6 @@ public class Database{
             st.setString(1, name);
 
             rs = st.executeQuery();
-            System.out.println(rs.getInt("ID"));
             c.commit();
             return rs.getInt("ID");
 
@@ -367,7 +357,6 @@ public class Database{
             st.setInt(1, userID);
 
             rs = st.executeQuery();
-            System.out.println(rs.getString("name"));
             c.commit();
             return rs.getString("name");
 
@@ -394,9 +383,7 @@ public class Database{
             st.setString(1, name);
 
             rs = st.executeQuery();
-            System.out.println(rs.getString("password"));
             c.commit();
-            System.out.println(rs);
             stmt.close();
             return rs.getString("password");
 
@@ -462,7 +449,6 @@ public class Database{
             st.setInt(3,friendID);
             st.setInt(4,userID);
             st.executeUpdate();
-            System.out.println();
             c.commit();
             stmt.close();
         }catch (Exception e){
@@ -484,7 +470,6 @@ public class Database{
             st.setString(4,userName);
             st.setString(5,date);
             st.executeUpdate();
-            System.out.println();
             c.commit();
             stmt.close();
         }catch (Exception e){

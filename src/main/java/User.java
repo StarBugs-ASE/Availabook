@@ -21,6 +21,7 @@ public class User {
         this.email = email;
         //  this.friendList = new ArrayList<String>();
     }
+
     public void setUser(String name, String passwd, String email){
         this.name = name;
         this.passwd = passwd;
@@ -32,24 +33,21 @@ public class User {
     public void setAvailatime(Availatime availatime){
         this.availatime = availatime;
     }
+
     public void deleteAvailatime(Availatime availatime){
         this.availatime = null;
     }
 
-    //  public void addFriend(String friendName){
-
-    //}
-
     public String getName(){
         return name;
     }
+
     public String getPasswd(){
         return passwd;
     }
+
     public String getEmail() {
         return email;
     }
 
-
-    //  public List<String> getFriendList() {return friendList;}
 }

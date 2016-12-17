@@ -47,18 +47,13 @@ public class Availatime {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Date date = new Date();
         Date time = new Date();
-        System.out.println(dateFormat.format(date));
-        System.out.println(timeFormat.format(time));
         if(this.getStartTime().compareTo(this.getEndTime()) >= 0
                 || this.getDate().compareTo(String.valueOf(dateFormat.format(date))) < 0
                 || (this.getDate().compareTo(dateFormat.format(date)) == 0 && this.getStartTime().compareTo(timeFormat.format(time)) <= 0))
         {
-            System.out.println(this.getDate().compareTo(timeFormat.format(date)));
             return false;
-
         }
         else {
-            System.out.println("Success");
             return true;
         }
     }
@@ -70,13 +65,8 @@ public class Availatime {
         //get current date time with Date()
         Date date = new Date();
         Date time = new Date();
-        System.out.println(dateFormat.format(date));
-        System.out.println(timeFormat.format(time));
-
         //get current date time with Calendar()
         Calendar cal = Calendar.getInstance();
-        //System.out.println(dateFormat.format(cal.getTime()));
-
     }
 }
 
