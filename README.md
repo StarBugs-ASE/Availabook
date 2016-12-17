@@ -32,7 +32,6 @@ COMS W4156 Advanced Software Engineering
 3. Created display of friend list on the friend page.
 4. Created the delete button for users to delete the available time.
 5. Produced alerts for error message when users' inputs are wrong.
-8. Sorted availatime by starting time or by user name.
 9. Modified the friend interface.
 
 ## Current Development
