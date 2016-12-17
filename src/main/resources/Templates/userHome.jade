@@ -1,14 +1,16 @@
 - responseData = messaget
 
 
-
-
-
-
 doctype html
 html
   head
     title userHome
+    script(language='javascript').
+                      //Avoid Backspace
+                      history.pushState(null, null, document.URL);
+                      window.addEventListener('popstate', function () {
+                      history.pushState(null, null, document.URL);
+                      });
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
@@ -122,10 +124,10 @@ html
             }
             document.getElementById("demo").innerHTML = list
 
-            var data = !{messagemy};;
+            var data2 = !{messagemy};;
             var mylist = "";
-            for(i=0;i < data.length; i += 1) {
-                            mylist += "<option>"+ data[i].startTime + " " +  data[i].endTime+ " " + data[i].date+ " " + data[i].tendency + "</option>";
+            for(i=0;i < data2.length; i += 1) {
+                            mylist += "<option>"+ data2[i].startTime + " " +  data2[i].endTime+ " " + data2[i].date+ " " + data2[i].tendency + "</option>";
             }
             document.getElementById("availatime").innerHTML = mylist;
 

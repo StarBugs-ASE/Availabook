@@ -108,7 +108,7 @@ public class Main {
 
 
         post("/hp", (rq, rs) -> {
-
+            HashMap<String, String> passwordmap = new HashMap<>();
             QueryParamsMap body = rq.queryMap();
             String loginInputEmail = body.get("email").value();
             String loginInputName = body.get("username").value();
@@ -122,14 +122,17 @@ public class Main {
             HashMap<String,String> map = new HashMap<String, String>();
 
             String encryptedInputPasswd = sqlitemethod2.encryptedPasswd(loginInputPassword);
-            if (passwd == null||!passwd.equals(encryptedInputPasswd)) {
-                rs.redirect("/login");
+            if (passwd != null && passwd.equals(encryptedInputPasswd)) {
+                System.out.println("encryptedInputPasswd " + encryptedInputPasswd);
+                rs.redirect("/user/home");
+                return null;
             }
-            System.out.println("encryptedInputPasswd " + encryptedInputPasswd);
-            rs.redirect("/user/home");
+            else {
+                passwordmap.put("message", "[{\"error\":\"Username or Password invalid!\"}]");
+                return new ModelAndView(passwordmap, "login");
+            }
+        }, new JadeTemplateEngine());
 
-            return null;
-        });
 
 
         before("/user/*", (rq, rs) -> {
@@ -162,6 +165,9 @@ public class Main {
             String tempString = new String();
             String friendNames = new String();
             tempString = "[";
+            if(friendNameList.size()==0){
+                tempString = "[[";
+            }
             for(int i=0; i<friendNameList.size();i++){
                 tempString += "{\"name\":\"" + friendNameList.get(i) + "\"},";
             }
@@ -181,7 +187,7 @@ public class Main {
                     myAvailatime.add(availatime);
                 }
                 //if(friendshipList.size()==0){
-                   // isFriend = true;
+                // isFriend = true;
                 //}
 
                 for (int j = 0; j < friendshipList.size(); j++) {
@@ -204,6 +210,9 @@ public class Main {
             map.put("messaget", gson.toJson(visibleAvailatime));
             System.out.println(gson.toJson(visibleAvailatime));
             System.out.print(friendNames);
+            System.out.print(friendNames);
+            System.out.print(friendNames);
+            System.out.print(friendNames);
             return new ModelAndView(map, "userHome");
         }, new JadeTemplateEngine());
 
@@ -225,12 +234,12 @@ public class Main {
             }
             String tempString = new String();
             String friendNames = new String();
-            tempString = "[";
             for(int i=0; i<friendNameList.size();i++){
                 tempString += "{\"name\":\"" + friendNameList.get(i) + "\"},";
             }
             friendNames = tempString.substring(0,tempString.length()-1);
             friendNames += "]";
+            friendNames = "[" + friendNames;
             map.put("friendNameList", friendNames);
             /* test friendship*/
             /* ############# */
@@ -336,19 +345,26 @@ public class Main {
             String tempString = new String();
             String friendNames = new String();
             tempString = "[";
+            if(friendNameList.size()==0){
+                tempString = "[[";
+            }
             for(int i=0; i<friendNameList.size();i++){
                 tempString += "{\"name\":\"" + friendNameList.get(i) + "\"},";
             }
             friendNames = tempString.substring(0,tempString.length()-1);
             friendNames += "]";
             map.put("friendNameList", friendNames);
+            System.out.print(friendNames);
+            System.out.print(friendNames);
+            System.out.print(friendNames);
 
 
 
             if(!tempAvailatime.isValidAvailatime()){
                 System.out.println("invalid available timetime");
-                map.put("message", "Your input of available time is invalid.");
+                map.put("message", "[{\"error\":\"Your input of available time is invalid!\"}]");
                 return new ModelAndView(map, "addAvailatime");
+
             }
 
             else {
